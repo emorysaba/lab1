@@ -249,7 +249,7 @@ Given the year, write two functions that calculate the month
 (computus_month) and day (computus_day) of Easter in that year via the
 Computus function.
 
-In 2018, Easter took place on April 1st. Your functions should reflect 
+In 2018, Easter took place on April 1st. Your functions should reflect
 that:
 
   # computus_month 2018;;

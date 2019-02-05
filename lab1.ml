@@ -213,7 +213,10 @@ to the function.
 ......................................................................*)
 
 let say_hello (name : string) : string =
-  failwith "say_hello not implemented";;
+  if name == "Gabby" then
+    "Hi Gabby. Welcome home! How are you today?"
+  else
+    "Hi " ^ name ^ ". How are you today?";;
 
 (*......................................................................
 Exercise 9: Define a function, small_bills, that determines, given a

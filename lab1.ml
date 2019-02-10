@@ -101,7 +101,7 @@ appropriate OCaml expression to assign the value to the variable
 exercise1 below.
 ......................................................................*)
 
-let exercise3 () = ~- (5 - 3 );;
+let exercise3 () = ~- (5 - 3);;
 
 (* Hint: The OCaml concrete expression
 
@@ -228,8 +228,10 @@ assume (perhaps unrealistically) that all prices are given as
 integers. For this lab, you may assume all prices given are
 non-negative.
 ......................................................................*)
+
 let small_bills (price : int) : bool =
-  failwith "small_bills not implemented" ;;
+  let cutoff = 20 in
+  (price mod cutoff) <> 0 ;;
 
 (*......................................................................
 Exercise 10:
@@ -257,10 +259,26 @@ that:
 
 ......................................................................*)
 
+let computus_common (year : int) : int =
+  let a = year mod 19 in
+  let b = year / 100 in
+  let c = year mod 100 in
+  let d = b / 4 in
+  let e = b mod 4 in
+  let f = (b + 8) / 25 in
+  let g = (b - f + 1) / 3 in
+  let h = (19 * a + b - d - g + 15) mod 30 in
+  let i = c / 4 in
+  let k = c mod 4 in
+  let l = (32 + 2 * e + 2 * i - h - k) mod 7 in
+  let m = (a + 11 * h + 22 * l) / 451 in
+  h + l - 7 * m + 114 ;;
+
 let computus_month (year : int) : int =
-  failwith "computus_month not implemented" ;;
-let computus_day (year : int) : int =
-  failwith "computus_day not implemented" ;;
+  (computus_common year) / 31 ;;
+
+let computus_day (year : int) =
+  1 + ((computus_common) year mod 31) ;;
 
 (*======================================================================
 Part 4: Utilizing recursion
@@ -278,8 +296,10 @@ this exercise, you may assume all inputs will be positive.
 
 ......................................................................*)
 
-let factorial (x : int) : int =
-  failwith "factorial not implementated" ;;
+let rec factorial (x : int) : int =
+  if x < 0 then raise (Invalid_argument "Input must be non-negative.")
+  else if x = 0 then 1
+  else x * factorial (x - 1) ;;
 
 (*......................................................................
 Exercise 12: Define a recursive function that sums all the elements
@@ -297,5 +317,6 @@ the mathematician Carl Freiedrich Gauss as a seven-year-old, *in his
 head*!)
 ......................................................................*)
 
-let sum_from_zero (x : int) : int =
-  failwith "sum_from_zero not implemented" ;;
+let rec sum_from_zero (x : int) : int =
+  if x = 0 then 0
+  else x + sum_from_zero (if x < 0 then succ x else pred x) ;;
